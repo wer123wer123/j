@@ -157,12 +157,15 @@
         .bubble:nth-child(5) { width: 30px; height: 30px; animation-duration: 45s; }
         .bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 65s; }
 
-        /* Angepasster Stil für die Anweisungen */
-        .instructions {
-            font-size: 11px;  /* Schriftgröße um 1px größer als vorher */
-            color: #b0b0b0;    /* Hellgrau färben */
-            text-align: center;
-            margin-top: 5px;
+        /* Styling für das Datum und Uhrzeit oben rechts */
+        .datetime {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            z-index: 3;
         }
     </style>
 </head>
@@ -174,6 +177,9 @@
     <div class="bubble" style="top: 50%; left: 30%;"></div>
     <div class="bubble" style="top: 60%; left: 60%;"></div>
     <div class="bubble" style="top: 80%; left: 20%;"></div>
+
+    <!-- Anzeige für Datum und Uhrzeit -->
+    <div class="datetime" id="datetime"></div>
 
     <div class="container">
         <h2>Meldeliste für Schüler*innen</h2>
@@ -194,25 +200,19 @@
 
         function renderList() {
             studentList.innerHTML = '';
-            let waitingNumber = 5;  // Startnummer für die Warteliste
             students.forEach((name, index) => {
                 const li = document.createElement('li');
                 li.textContent = name;
-
-                // Wenn der Index >= 4 (5. Position), füge den Text hinzu und zeige die Wartenummer
-                if (index >= 4) {
+                if ((index + 1) % 5 === 0) {
+                    li.style.fontSize = '32px';  // Alle fünfte Position doppelt so groß
                     const waitMessage = document.createElement('p');
                     waitMessage.className = 'wait-message';
-                    waitMessage.textContent = 'Der nächste Mitarbeiter ist schon für Sie reserviert';
-
+                    waitMessage.textContent = `Der nächste Mitarbeiter ist schon für Sie reserviert...`;
                     const waitNumber = document.createElement('p');
-                    waitNumber.className = 'wait-message';
-                    waitNumber.textContent = `Wartenummer: ${waitingNumber++}`;
-
+                    waitNumber.textContent = `Wartenummer: ${Math.floor(index / 5) + 1}`;
                     li.appendChild(waitMessage);
                     li.appendChild(waitNumber);
                 }
-
                 li.onclick = () => removeStudent(index);
                 studentList.appendChild(li);
             });
@@ -244,8 +244,25 @@
             }
         }
 
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'short',
+                day: '2-digit',
+                month: 'short',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'GMT',
+                hour12: false
+            };
+            const formattedDateTime = now.toLocaleString('de-DE', options);
+            document.getElementById('datetime').textContent = formattedDateTime;
+        }
+
+        setInterval(updateDateTime, 60000);  // Aktualisiere alle 60 Sekunden
+        updateDateTime();  // Initiale Anzeige
+
         renderList();
     </script>
 </body>
 </html>
-
