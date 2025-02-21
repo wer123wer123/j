@@ -208,17 +208,4 @@
                     // Warteposition Text hinzufügen
                     const waitPosition = document.createElement('p');
                     waitPosition.className = 'wait-position';
-                    waitPosition.textContent = `Ihre aktuelle Warteposition: ${index + 1}`;
-                    li.appendChild(waitPosition);
-                }
-                li.onclick = () => removeStudent(index);
-                studentList.appendChild(li);
-            });
-            localStorage.setItem('students', JSON.stringify(students));
-        }
-
-        function addStudent() {
-            const name = document.getElementById('nameInput').value.trim();
-            if (name && !students.includes(name)) {
-                students.push(name);
-               
+                    waitPosition.text
