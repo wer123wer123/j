@@ -125,46 +125,47 @@
             margin-top: 5px;
         }
 
-        /* Animation für die Bläschen */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background-color: rgba(0, 51, 102, 0.6); /* Helleres Blau */
-            animation: float 45s infinite linear; /* Sehr langsame Bewegung */
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.6); /* 3D-Effekt und Glanzpunkt */
-        }
+       /* Animation für die Bläschen */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0, 51, 102, 0.6); /* Helleres Blau */
+    animation: float 45s infinite linear; /* Sehr langsame Bewegung */
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.6); /* 3D-Effekt und Glanzpunkt */
+}
 
-        /* Bewegung der Bläschen über den Bildschirm */
-        @keyframes float {
-            0% {
-                transform: translateX(-10vw) translateY(-10vh);
-                opacity: 0.5;
-            }
-            25% {
-                transform: translateX(80vw) translateY(10vh);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateX(50vw) translateY(50vh);
-                opacity: 0.9;
-            }
-            75% {
-                transform: translateX(20vw) translateY(70vh);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateX(-10vw) translateY(90vh);
-                opacity: 0.5;
-            }
-        }
+/* Bewegung der Bläschen über den Bildschirm */
+@keyframes float {
+    0% {
+        transform: translateX(-10vw) translateY(-10vh);
+        opacity: 0.5;
+    }
+    25% {
+        transform: translateX(80vw) translateY(10vh);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateX(50vw) translateY(50vh);
+        opacity: 0.9;
+    }
+    75% {
+        transform: translateX(20vw) translateY(70vh);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(-10vw) translateY(90vh);
+        opacity: 0.5;
+    }
+}
 
-        /* Unterschiedliche Größen der Bläschen */
-        .bubble:nth-child(1) { width: 30px; height: 30px; animation-duration: 50s; }
-        .bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 55s; }
-        .bubble:nth-child(3) { width: 35px; height: 35px; animation-duration: 60s; }
-        .bubble:nth-child(4) { width: 40px; height: 40px; animation-duration: 70s; }
-        .bubble:nth-child(5) { width: 30px; height: 30px; animation-duration: 45s; }
-        .bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 65s; }
+/* Unterschiedliche Größen der Bläschen */
+.bubble:nth-child(1) { width: 30px; height: 30px; animation-duration: 50s; }
+.bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 55s; }
+.bubble:nth-child(3) { width: 35px; height: 35px; animation-duration: 60s; }
+.bubble:nth-child(4) { width: 40px; height: 40px; animation-duration: 70s; }
+.bubble:nth-child(5) { width: 30px; height: 30px; animation-duration: 45s; }
+.bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 65s; }
+
 
         /* Styling für das Datum und Uhrzeit oben rechts */
         .datetime {
