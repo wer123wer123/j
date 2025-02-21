@@ -198,7 +198,7 @@
                     li.style.fontSize = '32px';  // Alle fünfte Position doppelt so groß
                     const waitMessage = document.createElement('p');
                     waitMessage.className = 'wait-message';
-                    waitMessage.textContent = `Einen Moment, der nächste Mitarbeiter ist schon für Sie reserviert... Ihre Warte-Nummer: ${index + 1}`;
+                    waitMessage.textContent = `Einen Moment, der nächste Mitarbeiter ist schon für Sie reserviert... ${index + 1}`;
                     li.appendChild(waitMessage);
                 }
                 li.onclick = () => removeStudent(index);
