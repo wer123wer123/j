@@ -3,290 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meldeliste für Schüler*innen</title>
+    <title>Meldungen</title>
     <style>
-        /* Hintergrundfarbe ändern */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e3f2fd; /* Helles Blau */
-            text-align: center;
-            padding: 20px;
-            overflow: hidden; /* Verhindert Scrollen durch Bläschen */
+            font-family: Arial, sans-serif;
+        }
+        .entry {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
             position: relative;
-            height: 100vh; /* Füllt den gesamten Bildschirm */
-            font-size: 18px; /* Schriftgröße für den Body vergrößert */
         }
-
-        /* Container anpassen */
-        .container {
-            background: white;
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative; /* Container bleibt vor den Bläschen */
-            z-index: 2;
-            max-height: calc(100vh - 100px); /* Platz für den Button oben */
-            overflow-y: auto; /* Scrollt, wenn zu viel Inhalt */
-        }
-
-        h2 {
-            color: #333;
-            font-size: 28px; /* Schriftgröße für h2 vergrößert */
-        }
-
-        /* Eingabefelder untereinander anordnen und Maximallänge auf 25 Zeichen setzen */
-        input {
-            width: 100%;
+        .alert-box {
+            background-color: yellow;
             padding: 10px;
             margin: 10px 0;
-            border: 2px solid #ced4da;
-            border-radius: 6px;
-            font-size: 18px; /* Schriftgröße des Input-Feldes vergrößert */
-            text-align: center;
-            max-length: 25px; /* Maximale Länge auf 25 Zeichen setzen */
-            box-sizing: border-box; /* Verhindert Überlauf */
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            font-size: 18px; /* Schriftgröße des Buttons vergrößert */
-            cursor: pointer;
-            border-radius: 6px;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Der alles entfernen Button rechts neben dem Eintragen-Button */
-        .clear-button {
-            padding: 7px 15px; /* 25% kleiner */
-            font-size: 14px; /* Kleinere Schrift */
-            background-color: #dc3545;
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-left: 10px; /* Abstand zwischen den Buttons */
-        }
-
-        .clear-button:hover {
-            background-color: #c82333;
-        }
-
-        /* Die Liste der Schüler*innen untereinander anzeigen */
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-            text-align: left;
-            max-height: 400px; /* Maximale Höhe der Liste */
-            overflow-y: auto; /* Ermöglicht das Scrollen bei vielen Einträgen */
-        }
-
-        li {
-            background: #ffffff;
-            padding: 10px 15px;
-            margin: 5px 0;
-            border-radius: 6px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 18px; /* Schriftgröße der Listenelemente vergrößert */
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-            white-space: nowrap;
-            box-sizing: border-box; /* Verhindert Überlauf */
-            text-align: center; /* Zentriert den Text in den Kästchen */
-        }
-
-        li:hover {
-            transform: scale(1.05);
-            background: #e9ecef;
-        }
-
-        /* Nachricht unter dem großen Eintrag */
-        .wait-message {
-            font-size: 14px;
-            color: #888; /* Graue Farbe */
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        /* Warte-Nummer Styling */
-        .wait-number {
-            font-size: 18px; /* Gleiche Größe wie der Text in der Liste */
-            color: #333;     /* Gleiche Farbe wie der Haupttext */
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        /* Animation für die Bläschen */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background-color: rgba(0, 51, 102, 0.6); /* Helleres Blau */
-            animation: float 45s infinite linear; /* Sehr langsame Bewegung */
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.6); /* 3D-Effekt und Glanzpunkt */
-        }
-
-        /* Bewegung der Bläschen über den Bildschirm */
-        @keyframes float {
-            0% {
-                transform: translateX(-10vw) translateY(-10vh);
-                opacity: 0.5;
-            }
-            25% {
-                transform: translateX(80vw) translateY(10vh);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateX(50vw) translateY(50vh);
-                opacity: 0.9;
-            }
-            75% {
-                transform: translateX(20vw) translateY(70vh);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateX(-10vw) translateY(90vh);
-                opacity: 0.5;
-            }
-        }
-
-        /* Unterschiedliche Größen der Bläschen */
-        .bubble:nth-child(1) { width: 30px; height: 30px; animation-duration: 50s; }
-        .bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 55s; }
-        .bubble:nth-child(3) { width: 35px; height: 35px; animation-duration: 60s; }
-        .bubble:nth-child(4) { width: 40px; height: 40px; animation-duration: 70s; }
-        .bubble:nth-child(5) { width: 30px; height: 30px; animation-duration: 45s; }
-        .bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 65s; }
-
-        /* Styling für das Datum und Uhrzeit oben rechts */
-        .datetime {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 18px; /* Schriftgröße für die Datumsanzeige vergrößert */
+            border: 1px solid black;
             font-weight: bold;
-            color: #333;
-            z-index: 3;
         }
     </style>
 </head>
 <body>
-    <!-- Bläschen, die im Hintergrund fließen -->
-    <div class="bubble" style="top: 5%; left: 10%;"></div>
-    <div class="bubble" style="top: 20%; left: 50%;"></div>
-    <div class="bubble" style="top: 30%; left: 80%;"></div>
-    <div class="bubble" style="top: 50%; left: 30%;"></div>
-    <div class="bubble" style="top: 60%; left: 60%;"></div>
-    <div class="bubble" style="top: 80%; left: 20%;"></div>
-
-    <!-- Anzeige für Datum und Uhrzeit -->
-    <div class="datetime" id="datetime"></div>
-
-    <div class="container">
-        <h2>Meldeliste für Schüler*innen</h2>
-        <input type="text" id="nameInput" placeholder="Dein Name" maxlength="25" onkeypress="handleKeyPress(event)">
-        <button onclick="addStudent()">Eintragen</button>
-        <button class="clear-button" onclick="clearList()">Alles Entfernen</button>
-        
-        <!-- Text unter dem Button verändert und angepasst -->
-        <p class="wait-message">Trage deinen Namen ein und bestätige mit Enter oder mit der Enter-Taste, um deinen Namen auszutragen, klicke ihn einmal an.</p>
-        
-        <!-- Liste der Schüler*innen, die jetzt scrollbar ist -->
-        <ul id="studentList"></ul>
-    </div>
+    <h1>Meldungen</h1>
     
-    <script>
-        let students = JSON.parse(localStorage.getItem('students')) || [];
-        const studentList = document.getElementById('studentList');
-
-        function renderList() {
-            studentList.innerHTML = '';
-            students.forEach((name, index) => {
-                const li = document.createElement('li');
-                li.textContent = name;
-
-                // Ab dem fünften Element: Warte-Nummer hinzufügen und fortlaufend zählen
-                if (index >= 4) {
-                    const waitMessage = document.createElement('p');
-                    waitMessage.className = 'wait-message';
-                    waitMessage.textContent = "Der nächste Mitarbeiter ist schon für Sie reserviert...";
-                    
-                    // Erstelle die Warte-Nummer (beginnend bei 5)
-                    const waitNumber = document.createElement('p');
-                    waitNumber.className = 'wait-number';
-                    waitNumber.textContent = `Wartenummer: ${index - 4 + 5}`; // Beginnt bei 5 (index - 4 + 5)
-                    
-                    li.appendChild(waitMessage);
-                    li.appendChild(waitNumber);
-                }
-
-                li.onclick = () => removeStudent(index);
-                studentList.appendChild(li);
-            });
-
-            localStorage.setItem('students', JSON.stringify(students));
-        }
-
-        function addStudent() {
-            const name = document.getElementById('nameInput').value.trim();
-            if (name && !students.includes(name)) {
-                students.push(name);
-                document.getElementById('nameInput').value = '';
-                renderList();
-            }
-        }
-
-        function removeStudent(index) {
-            students.splice(index, 1);
-            renderList();
-        }
-
-        function clearList() {
-            const password = prompt("Bitte Passwort eingeben, um alles zu entfernen:");
-            const correctPassword = "0";  // Passwort ist jetzt 0
-
-            if (password === correctPassword) {
-                students = [];
-                renderList();  // Liste wird gerendert und zurückgesetzt
-                alert("Die Liste wurde erfolgreich gelöscht.");
-            } else {
-                alert("Falsches Passwort. Die Liste bleibt erhalten.");
-            }
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                addStudent();
-            }
-        }
-
-        function updateDateTime() {
-            const now = new Date();
-            const options = {
-                weekday: 'short',
-                day: '2-digit',
-                month: 'short',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false
-            };
-            // Verwende die UTC-Methode
-            const formattedDateTime = now.toLocaleString('de-DE', options) + ' UTC';
-            document.getElementById('datetime').textContent = formattedDateTime;
-        }
-
-        setInterval(updateDateTime, 60000);  // Aktualisiere alle 60 Sekunden
-        updateDateTime();  // Initiale Anzeige
-
-        renderList();
-    </script>
+    <div class="entries">
+        <div class="entry">Eintrag 1</div>
+        <div class="entry">Eintrag 2</div>
+        <div class="entry">Eintrag 3</div>
+        <div class="entry">Eintrag 4</div>
+        <div class="entry">Eintrag 5</div>
+        <div class="entry">Eintrag 6</div>
+        
+        <div class="alert-box">Zur Zeit besteht ein hohes Melde Aufkommen - please hold the line - der nächste Mitarbeiter ist bereits für Sie reserviert</div>
+        
+        <div class="entry">Eintrag 7</div>
+        <div class="entry">Eintrag 8</div>
+        <div class="entry">Eintrag 9</div>
+        <div class="entry">Eintrag 10</div>
+    </div>
 </body>
 </html>
