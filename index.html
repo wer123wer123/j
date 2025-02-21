@@ -219,10 +219,10 @@
                     waitMessage.className = 'wait-message';
                     waitMessage.textContent = "Der nächste Mitarbeiter ist schon für Sie reserviert...";
                     
-                    // Erstelle die Warte-Nummer (beginnend mit 5 und fortlaufend)
+                    // Erstelle die Warte-Nummer (beginnend bei 5)
                     const waitNumber = document.createElement('p');
                     waitNumber.className = 'wait-number';
-                    waitNumber.textContent = `Wartenummer: ${index - 3}`; // Beginnt bei 5 (index - 3)
+                    waitNumber.textContent = `Wartenummer: ${index - 4 + 5}`; // Beginnt bei 5 (index - 4 + 5)
                     
                     li.appendChild(waitMessage);
                     li.appendChild(waitNumber);
