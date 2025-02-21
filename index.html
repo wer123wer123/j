@@ -14,6 +14,7 @@
             overflow: hidden; /* Verhindert Scrollen durch Bläschen */
             position: relative;
             height: 100vh; /* Füllt den gesamten Bildschirm */
+            font-size: 18px; /* Schriftgröße für den Body vergrößert */
         }
 
         /* Container anpassen */
@@ -32,7 +33,7 @@
 
         h2 {
             color: #333;
-            font-size: 22px;
+            font-size: 28px; /* Schriftgröße für h2 vergrößert */
         }
 
         /* Eingabefelder untereinander anordnen und Maximallänge auf 25 Zeichen setzen */
@@ -42,7 +43,7 @@
             margin: 10px 0;
             border: 2px solid #ced4da;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 18px; /* Schriftgröße des Input-Feldes vergrößert */
             text-align: center;
             max-length: 25px; /* Maximale Länge auf 25 Zeichen setzen */
             box-sizing: border-box; /* Verhindert Überlauf */
@@ -53,7 +54,7 @@
             border: none;
             background-color: #007bff;
             color: white;
-            font-size: 16px;
+            font-size: 18px; /* Schriftgröße des Buttons vergrößert */
             cursor: pointer;
             border-radius: 6px;
             transition: background 0.3s;
@@ -66,7 +67,7 @@
         /* Der alles entfernen Button rechts neben dem Eintragen-Button */
         .clear-button {
             padding: 7px 15px; /* 25% kleiner */
-            font-size: 12px; /* Kleinere Schrift */
+            font-size: 14px; /* Kleinere Schrift */
             background-color: #dc3545;
             border-radius: 6px;
             color: white;
@@ -95,7 +96,7 @@
             margin: 5px 0;
             border-radius: 6px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
+            font-size: 18px; /* Schriftgröße der Listenelemente vergrößert */
             cursor: pointer;
             transition: transform 0.2s, background 0.3s;
             white-space: nowrap;
@@ -110,7 +111,7 @@
 
         /* Nachricht unter dem großen Eintrag */
         .wait-message {
-            font-size: 12px;
+            font-size: 14px;
             color: #888;
             text-align: center;
             margin-top: 5px;
@@ -162,7 +163,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 16px;
+            font-size: 18px; /* Schriftgröße für die Datumsanzeige vergrößert */
             font-weight: bold;
             color: #333;
             z-index: 3;
@@ -252,10 +253,10 @@
                 month: 'short',
                 hour: '2-digit',
                 minute: '2-digit',
-                timeZone: 'GMT',
                 hour12: false
             };
-            const formattedDateTime = now.toLocaleString('de-DE', options);
+            // Verwende die UTC-Methode
+            const formattedDateTime = now.toLocaleString('de-DE', options) + ' UTC';
             document.getElementById('datetime').textContent = formattedDateTime;
         }
 
@@ -266,3 +267,4 @@
     </script>
 </body>
 </html>
+
