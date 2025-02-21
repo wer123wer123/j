@@ -117,6 +117,14 @@
             margin-top: 5px;
         }
 
+        /* Warte-Nummer Styling */
+        .wait-number {
+            font-size: 18px; /* Gleiche Größe wie der Text in der Liste */
+            color: #333;     /* Gleiche Farbe wie der Haupttext */
+            text-align: center;
+            margin-top: 5px;
+        }
+
         /* Animation für die Bläschen */
         .bubble {
             position: absolute;
@@ -168,12 +176,6 @@
             color: #333;
             z-index: 3;
         }
-
-        /* Text unter dem Button */
-        .instructions {
-            font-size: 14px;  /* Zwei Nummern kleiner */
-            color: #888;  /* Grau */
-        }
     </style>
 </head>
 <body>
@@ -210,19 +212,26 @@
             students.forEach((name, index) => {
                 const li = document.createElement('li');
                 li.textContent = name;
-                if ((index + 1) % 5 === 0) {
-                    li.style.fontSize = '32px';  // Alle fünfte Position doppelt so groß
+
+                // Ab dem fünften Element: Warte-Nummer hinzufügen und fortlaufend zählen
+                if (index >= 4) {
                     const waitMessage = document.createElement('p');
                     waitMessage.className = 'wait-message';
-                    waitMessage.textContent = 'Der nächste Mitarbeiter ist schon für Sie reserviert...';
+                    waitMessage.textContent = "Der nächste Mitarbeiter ist schon für Sie reserviert...";
+                    
+                    // Erstelle die Warte-Nummer
                     const waitNumber = document.createElement('p');
-                    waitNumber.textContent = `Wartenummer: ${Math.floor(index / 5) + 1}`;
+                    waitNumber.className = 'wait-number';
+                    waitNumber.textContent = `Wartenummer: ${Math.floor((index) / 5) + 1}`;
+                    
                     li.appendChild(waitMessage);
                     li.appendChild(waitNumber);
                 }
+
                 li.onclick = () => removeStudent(index);
                 studentList.appendChild(li);
             });
+
             localStorage.setItem('students', JSON.stringify(students));
         }
 
