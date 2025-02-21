@@ -1,4 +1,4 @@
-Container Button Background Hintergrundfarben Container anpassen<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -125,59 +125,46 @@ Container Button Background Hintergrundfarben Container anpassen<!DOCTYPE html>
             margin-top: 5px;
         }
 
-      /* Bunte, Regenbogenfarbene Bläschen */
-.bubble {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 0, 0, 0.6); /* Anfangs rot */
-    animation: float 45s infinite linear, color-change 5s infinite ease-in-out; /* Animation für Bläschenbewegung und Farbwechsel */
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.6); /* 3D-Effekt und Glanzpunkt */
-}
+        /* Animation für die Bläschen */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(0, 51, 102, 0.6); /* Helleres Blau */
+            animation: float 45s infinite linear; /* Sehr langsame Bewegung */
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.6); /* 3D-Effekt und Glanzpunkt */
+        }
 
-/* Bläschen bewegen sich über den Bildschirm */
-@keyframes float {
-    0% {
-        transform: translateX(-10vw) translateY(-10vh);
-        opacity: 0.5;
-    }
-    25% {
-        transform: translateX(80vw) translateY(10vh);
-        opacity: 0.7;
-    }
-    50% {
-        transform: translateX(50vw) translateY(50vh);
-        opacity: 0.9;
-    }
-    75% {
-        transform: translateX(20vw) translateY(70vh);
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateX(-10vw) translateY(90vh);
-        opacity: 0.5;
-    }
-}
+        /* Bewegung der Bläschen über den Bildschirm */
+        @keyframes float {
+            0% {
+                transform: translateX(-10vw) translateY(-10vh);
+                opacity: 0.5;
+            }
+            25% {
+                transform: translateX(80vw) translateY(10vh);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateX(50vw) translateY(50vh);
+                opacity: 0.9;
+            }
+            75% {
+                transform: translateX(20vw) translateY(70vh);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateX(-10vw) translateY(90vh);
+                opacity: 0.5;
+            }
+        }
 
-/* Regenbogenfarben Animation */
-@keyframes color-change {
-    0% { background-color: red; }
-    14% { background-color: orange; }
-    28% { background-color: yellow; }
-    42% { background-color: green; }
-    57% { background-color: blue; }
-    71% { background-color: indigo; }
-    85% { background-color: violet; }
-    100% { background-color: red; }
-}
-
-/* Unterschiedliche Größen der Bläschen */
-.bubble:nth-child(1) { width: 30px; height: 30px; animation-duration: 50s; }
-.bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 55s; }
-.bubble:nth-child(3) { width: 35px; height: 35px; animation-duration: 60s; }
-.bubble:nth-child(4) { width: 40px; height: 40px; animation-duration: 70s; }
-.bubble:nth-child(5) { width: 30px; height: 30px; animation-duration: 45s; }
-.bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 65s; }
-
+        /* Unterschiedliche Größen der Bläschen */
+        .bubble:nth-child(1) { width: 30px; height: 30px; animation-duration: 50s; }
+        .bubble:nth-child(2) { width: 25px; height: 25px; animation-duration: 55s; }
+        .bubble:nth-child(3) { width: 35px; height: 35px; animation-duration: 60s; }
+        .bubble:nth-child(4) { width: 40px; height: 40px; animation-duration: 70s; }
+        .bubble:nth-child(5) { width: 30px; height: 30px; animation-duration: 45s; }
+        .bubble:nth-child(6) { width: 25px; height: 25px; animation-duration: 65s; }
 
         /* Styling für das Datum und Uhrzeit oben rechts */
         .datetime {
@@ -263,8 +250,16 @@ Container Button Background Hintergrundfarben Container anpassen<!DOCTYPE html>
         }
 
         function clearList() {
-            students = [];
-            renderList();
+            const password = prompt("Bitte Passwort eingeben, um alles zu entfernen:");
+            const correctPassword = "0";  // Passwort ist jetzt 0
+
+            if (password === correctPassword) {
+                students = [];
+                renderList();  // Liste wird gerendert und zurückgesetzt
+                alert("Die Liste wurde erfolgreich gelöscht.");
+            } else {
+                alert("Falsches Passwort. Die Liste bleibt erhalten.");
+            }
         }
 
         function handleKeyPress(event) {
@@ -274,23 +269,18 @@ Container Button Background Hintergrundfarben Container anpassen<!DOCTYPE html>
         }
 
         function updateDateTime() {
-    const now = new Date();
-    const options = {
-        weekday: 'short',
-        day: '2-digit',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    };
-    // Verwende die UTC-Methode
-    const formattedDateTime = now.toLocaleString('de-DE', options) + ' UTC';
-    document.getElementById('datetime').textContent = formattedDateTime;
-}
-
-setInterval(updateDateTime, 60000);  // Aktualisiere alle 60 Sekunden
-updateDateTime();  // Initiale Anzeige
-
+            const now = new Date();
+            const options = {
+                weekday: 'short',
+                day: '2-digit',
+                month: 'short',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            // Verwende die UTC-Methode
+            const formattedDateTime = now.toLocaleString('de-DE', options) + ' UTC';
+            document.getElementById('datetime').textContent = formattedDateTime;
         }
 
         setInterval(updateDateTime, 60000);  // Aktualisiere alle 60 Sekunden
