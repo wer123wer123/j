@@ -169,10 +169,10 @@
             z-index: 3;
         }
 
-        /* Stil für den Text unter dem Button (Anleitungstext) */
+        /* Text unter dem Button */
         .instructions {
-            font-size: 14px; /* Zwei Nummern kleiner */
-            color: #d3d3d3; /* Hellgrau */
+            font-size: 14px;  /* Zwei Nummern kleiner */
+            color: #888;  /* Grau */
         }
     </style>
 </head>
@@ -214,7 +214,7 @@
                     li.style.fontSize = '32px';  // Alle fünfte Position doppelt so groß
                     const waitMessage = document.createElement('p');
                     waitMessage.className = 'wait-message';
-                    waitMessage.textContent = `Der nächste Mitarbeiter ist schon für Sie reserviert...`;
+                    waitMessage.textContent = 'Der nächste Mitarbeiter ist schon für Sie reserviert...';
                     const waitNumber = document.createElement('p');
                     waitNumber.textContent = `Wartenummer: ${Math.floor(index / 5) + 1}`;
                     li.appendChild(waitMessage);
