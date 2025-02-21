@@ -164,12 +164,6 @@
             text-align: center;
             margin-top: 5px;
         }
-
-        /* Stil für größere Listeneinträge */
-        .large-entry {
-            font-size: 32px;
-            background-color: #f8f9fa;
-        }
     </style>
 </head>
 <body>
@@ -200,21 +194,21 @@
 
         function renderList() {
             studentList.innerHTML = '';
+            let waitingNumber = 5;  // Startnummer für die Warteliste
             students.forEach((name, index) => {
                 const li = document.createElement('li');
                 li.textContent = name;
-                
-                // Wenn der Index >= 5 ist, doppelt so groß und mit Text anzeigen
-                if ((index + 1) % 5 === 0) {
-                    li.classList.add('large-entry');  // Doppelte Größe
+
+                // Wenn der Index >= 4 (5. Position), füge den Text hinzu und zeige die Wartenummer
+                if (index >= 4) {
                     const waitMessage = document.createElement('p');
                     waitMessage.className = 'wait-message';
-                    waitMessage.textContent = `Der nächste Mitarbeiter ist schon für Sie reserviert`;
+                    waitMessage.textContent = 'Der nächste Mitarbeiter ist schon für Sie reserviert';
 
                     const waitNumber = document.createElement('p');
                     waitNumber.className = 'wait-message';
-                    waitNumber.textContent = `Wartenummer: ${Math.floor(index / 5) + 1}`;
-                    
+                    waitNumber.textContent = `Wartenummer: ${waitingNumber++}`;
+
                     li.appendChild(waitMessage);
                     li.appendChild(waitNumber);
                 }
