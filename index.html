@@ -116,14 +116,6 @@
             margin-top: 5px;
         }
 
-        /* Warteposition Text */
-        .wait-position {
-            font-size: 14px;
-            color: #333;
-            margin-top: 5px;
-            text-align: center;
-        }
-
         /* Animation für die Bläschen */
         .bubble {
             position: absolute;
@@ -204,12 +196,6 @@
                     waitMessage.className = 'wait-message';
                     waitMessage.textContent = `Der nächste Mitarbeiter ist schon für Sie reserviert...`;
                     li.appendChild(waitMessage);
-                    
-                    // Warteposition Text hinzufügen
-                    const waitPosition = document.createElement('p');
-                    waitPosition.className = 'wait-position';
-                    waitPosition.textContent = `Ihre aktuelle Warteposition: ${index + 1}`;
-                    li.appendChild(waitPosition);
                 }
                 li.onclick = () => removeStudent(index);
                 studentList.appendChild(li);
@@ -226,4 +212,23 @@
             }
         }
 
-       
+        function removeStudent(index) {
+            students.splice(index, 1);
+            renderList();
+        }
+
+        function clearList() {
+            students = [];
+            renderList();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                addStudent();
+            }
+        }
+
+        renderList();
+    </script>
+</body>
+</html>
