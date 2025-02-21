@@ -63,18 +63,16 @@
             background-color: #0056b3;
         }
 
-        /* Der alles entfernen Button oben rechts */
+        /* Der alles entfernen Button rechts neben dem Eintragen-Button */
         .clear-button {
-            position: absolute;
-            top: 20px; /* Button oben */
-            right: 20px; /* Button ganz rechts */
-            background-color: #dc3545;
-            padding: 5px 10px; /* Button 50% kleiner */
+            padding: 7px 15px; /* 25% kleiner */
             font-size: 12px; /* Kleinere Schrift */
+            background-color: #dc3545;
             border-radius: 6px;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-left: 10px; /* Abstand zwischen den Buttons */
         }
 
         .clear-button:hover {
@@ -116,6 +114,14 @@
             color: #888;
             text-align: center;
             margin-top: 5px;
+        }
+
+        /* Warteposition Text */
+        .wait-position {
+            font-size: 14px;
+            color: #333;
+            margin-top: 5px;
+            text-align: center;
         }
 
         /* Animation für die Bläschen */
@@ -174,12 +180,10 @@
         <h2>Meldeliste für Schüler*innen</h2>
         <input type="text" id="nameInput" placeholder="Dein Name" maxlength="25" onkeypress="handleKeyPress(event)">
         <button onclick="addStudent()">Eintragen</button>
+        <button class="clear-button" onclick="clearList()">Alles Entfernen</button>
         
         <!-- Text unter dem Button -->
         <p class="instructions">Trage deinen Namen ein und bestätige mit Enter oder mit der Enter-Taste, um deinen Namen auszutragen, klicke ihn einmal an.</p>
-        
-        <!-- Alles entfernen Button oben rechts -->
-        <button class="clear-button" onclick="clearList()">Alles Entfernen</button>
         
         <!-- Liste der Schüler*innen, die jetzt scrollbar ist -->
         <ul id="studentList"></ul>
@@ -198,8 +202,14 @@
                     li.style.fontSize = '32px';  // Alle fünfte Position doppelt so groß
                     const waitMessage = document.createElement('p');
                     waitMessage.className = 'wait-message';
-                    waitMessage.textContent = `Einen Moment, der nächste Mitarbeiter ist schon für Sie reserviert... ${index + 1}`;
+                    waitMessage.textContent = `Der nächste Mitarbeiter ist schon für Sie reserviert...`;
                     li.appendChild(waitMessage);
+                    
+                    // Warteposition Text hinzufügen
+                    const waitPosition = document.createElement('p');
+                    waitPosition.className = 'wait-position';
+                    waitPosition.textContent = `Ihre aktuelle Warteposition: ${index + 1}`;
+                    li.appendChild(waitPosition);
                 }
                 li.onclick = () => removeStudent(index);
                 studentList.appendChild(li);
@@ -216,23 +226,4 @@
             }
         }
 
-        function removeStudent(index) {
-            students.splice(index, 1);
-            renderList();
-        }
-
-        function clearList() {
-            students = [];
-            renderList();
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                addStudent();
-            }
-        }
-
-        renderList();
-    </script>
-</body>
-</html>
+       
