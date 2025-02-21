@@ -63,12 +63,11 @@
             background-color: #0056b3;
         }
 
-        /* Der alles entfernen Button unter dem langen Text, aber über den Eingabefeldern */
+        /* Der alles entfernen Button oben rechts */
         .clear-button {
             position: absolute;
-            bottom: 80px; /* Button über den Eingabefeldern */
-            left: 50%;
-            transform: translateX(-50%); /* Button zentrieren */
+            top: 20px; /* Button oben */
+            right: 20px; /* Button ganz rechts */
             background-color: #dc3545;
             padding: 5px 10px; /* Button 50% kleiner */
             font-size: 12px; /* Kleinere Schrift */
@@ -111,11 +110,12 @@
             background: #e9ecef;
         }
 
-        /* Text unter dem Button */
-        .instructions {
-            font-size: 14px;
-            color: #555;
-            margin-top: 15px;
+        /* Nachricht unter dem großen Eintrag */
+        .wait-message {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 5px;
         }
 
         /* Animation für die Bläschen */
@@ -178,7 +178,7 @@
         <!-- Text unter dem Button -->
         <p class="instructions">Trage deinen Namen ein und bestätige mit Enter oder mit der Enter-Taste, um deinen Namen auszutragen, klicke ihn einmal an.</p>
         
-        <!-- Alles entfernen Button unter dem langen Text, aber über den Eingabefeldern -->
+        <!-- Alles entfernen Button oben rechts -->
         <button class="clear-button" onclick="clearList()">Alles Entfernen</button>
         
         <!-- Liste der Schüler*innen, die jetzt scrollbar ist -->
@@ -194,6 +194,13 @@
             students.forEach((name, index) => {
                 const li = document.createElement('li');
                 li.textContent = name;
+                if ((index + 1) % 10 === 0) {
+                    li.style.fontSize = '32px';  // Alle zehnte Position doppelt so groß
+                    const waitMessage = document.createElement('p');
+                    waitMessage.className = 'wait-message';
+                    waitMessage.textContent = `Einen Moment, der nächste Mitarbeiter ist schon für Sie reserviert, Ihre Warte-Nummer: ${index + 1}`;
+                    li.appendChild(waitMessage);
+                }
                 li.onclick = () => removeStudent(index);
                 studentList.appendChild(li);
             });
