@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Container Button Background Hintergrundfarben Container anpassen<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -125,16 +125,16 @@
             margin-top: 5px;
         }
 
-       /* Animation für die Bläschen */
+      /* Bunte, Regenbogenfarbene Bläschen */
 .bubble {
     position: absolute;
     border-radius: 50%;
-    background-color: rgba(0, 51, 102, 0.6); /* Helleres Blau */
-    animation: float 45s infinite linear; /* Sehr langsame Bewegung */
+    background-color: rgba(255, 0, 0, 0.6); /* Anfangs rot */
+    animation: float 45s infinite linear, color-change 5s infinite ease-in-out; /* Animation für Bläschenbewegung und Farbwechsel */
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.6); /* 3D-Effekt und Glanzpunkt */
 }
 
-/* Bewegung der Bläschen über den Bildschirm */
+/* Bläschen bewegen sich über den Bildschirm */
 @keyframes float {
     0% {
         transform: translateX(-10vw) translateY(-10vh);
@@ -156,6 +156,18 @@
         transform: translateX(-10vw) translateY(90vh);
         opacity: 0.5;
     }
+}
+
+/* Regenbogenfarben Animation */
+@keyframes color-change {
+    0% { background-color: red; }
+    14% { background-color: orange; }
+    28% { background-color: yellow; }
+    42% { background-color: green; }
+    57% { background-color: blue; }
+    71% { background-color: indigo; }
+    85% { background-color: violet; }
+    100% { background-color: red; }
 }
 
 /* Unterschiedliche Größen der Bläschen */
